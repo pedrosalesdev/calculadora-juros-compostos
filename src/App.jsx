@@ -6,6 +6,37 @@ function App() {
   const [aporte, setAporte] = useState("");
   const [taxa, setTaxa] = useState("");
   const [tempo, setTempo] = useState("");
+  const [resultado, setResultado] = useState("");
+
+  function calcularJuros() {
+
+    // A função pega os valores armazenados no estado pelos inputs, converte para número, trata a taxa, aplica a lógica condicional, calcula separadamente o crescimento do capital e dos aportes ao longo do tempo, soma os dois e atualiza o estado de resultado. Input → Estado → Função → Novo estado → Tela
+
+    const capitalNum = Number(capital)
+    const aporteNum = Number(aporte)
+    const taxaNum = Number(taxa)
+    const tempoNum = Number(tempo)
+
+    const i = taxaNum / 100
+
+    // 🛑 caso especial: taxa zero
+    if (i === 0) {
+      const total = capitalNum + aporteNum * tempoNum
+      setResultado(total.toFixed(2))
+      return
+    }
+
+    const montanteCapital =
+      capitalNum * Math.pow(1 + i, tempoNum)
+
+    const montanteAportes =
+      aporteNum * ((Math.pow(1 + i, tempoNum) - 1) / i)
+
+    const montanteTotal = montanteCapital + montanteAportes
+
+    setResultado(montanteTotal.toFixed(2))
+  }
+
 
   return (
     <div className="container">
@@ -40,7 +71,15 @@ function App() {
           onChange={(e) => setTempo(e.target.value)}
         />
 
-        <button>Calcular</button>
+        <button onClick={calcularJuros}>
+          Calcular</button>
+
+          {resultado && (
+            <p>
+              Montante final: R$ {resultado}
+            </p>
+          )}
+
       </div>
     </div>
   );
