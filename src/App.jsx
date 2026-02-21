@@ -39,11 +39,12 @@ function App() {
 
 
   return (
-    <div className="container">
-      <h1>Calculadora de Juros Compostos</h1>
+    <div className="container space-y-10">
+      <h1 className="text-4xl font-bold mb-6">Juros Compostos</h1>
 
-      <div className="form">
+      <div className="form flex flex-col md:flex-row justify-center gap-4">
         <input
+          className="p-6 bg-gray-50 border border-gray-200 rounded-xl py-3 shadow-sm focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-sm"
           type="number"
           placeholder="Capital inicial"
           value={capital}
@@ -51,6 +52,7 @@ function App() {
         />
 
         <input
+          className="max-w-lg p-6 bg-gray-50 border border-gray-200 rounded-xl py-3 shadow-sm focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-sm"
           type="number"
           placeholder="Aporte mensal"
           value={aporte}
@@ -58,6 +60,7 @@ function App() {
         />
 
         <input
+          className="max-w-lg p-6 bg-gray-50 border border-gray-200 rounded-xl py-3 shadow-sm focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-sm"
           type="number"
           placeholder="Taxa de juros (% ao mês)"
           value={taxa}
@@ -65,22 +68,23 @@ function App() {
         />
 
         <input
+          className="max-w-lg p-6 bg-gray-50 border border-gray-200 rounded-xl py-3 shadow-sm focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder:text-sm"
           type="number"
           placeholder="Tempo (meses)"
           value={tempo}
           onChange={(e) => setTempo(e.target.value)}
         />
 
-        <button onClick={calcularJuros}>
+        <button onClick={calcularJuros} className="border bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition duration-200">
           Calcular</button>
 
-          {resultado && (
-            <p>
+      </div>
+
+      {resultado && (
+            <p className="text-2xl mb-4">
               Montante final: R$ {resultado}
             </p>
           )}
-
-      </div>
     </div>
   );
 }
